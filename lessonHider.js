@@ -6,18 +6,20 @@ angular.module('directivePractice').directive('lessonHider', function() {
       $scope.getSchedule = lessonService.getSchedule();
     },
     scope: {
-      lesson: '='
+      lesson: '=',
+      dayAlert: '&'
     },
     link: function(scope, element, attributes) {
       scope.getSchedule.then(function(response) {
         scope.schedule = response.data;
-        for (var i = 0; i < scope.schedule.length; i++) {
-          for (var prop in scope.schedule[i]) {
-            if (scope.lesson === scope.schedule[i][prop]) {
-              return element.css('text-decoration', 'line-through');
-            }
+
+        scope.schedule.forEach(function(scheduleDay) {
+          if (scheduleDay.lesson === scope.lesson) {
+            element.css('text-decoration', 'line-through');
+            return;
+            scope.lessonDay = scheduleDay.weekday;
           }
-        }
+        });
       });
     }
   }
