@@ -4,6 +4,8 @@ angular.module('directivePractice').directive('lessonHider', function() {
     templateUrl: 'lessonHider.html',
     controller: function($scope, lessonService) {
       $scope.getSchedule = lessonService.getSchedule();
+      $scope.strikethrough = false;
+
     },
     scope: {
       lesson: '=',
@@ -15,11 +17,21 @@ angular.module('directivePractice').directive('lessonHider', function() {
 
         scope.schedule.forEach(function(scheduleDay) {
           if (scheduleDay.lesson === scope.lesson) {
-            element.css('text-decoration', 'line-through');
+            scope.strikethrough = true;
             scope.lessonDay = scheduleDay.weekday;
             return;
           }
         });
+
+        scope.toggle = function() {
+          if (scope.strikethrough) {
+          element.css('text-decoration', 'line-through');
+        } else {
+          element.css('text-decoration', 'none');
+        }
+      }
+      scope.toggle();
+
       });
     }
   }
