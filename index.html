@@ -6,10 +6,10 @@
   </head>
   <body ng-controller="lessonCtrl">
 
-      <lesson-hider lesson="test"></lesson-hider>
-      <!-- <div>
-        {{test}}
-      </div> -->
+      <ul>
+        <lesson-hider ng-repeat="lesson in lessons" lesson="lesson"></lesson-hider>
+      </ul>
+
 
 
 
