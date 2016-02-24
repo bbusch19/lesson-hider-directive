@@ -31,6 +31,9 @@ angular.module('directivePractice').directive('lessonHider', function() {
         }
       }
       scope.toggle();
+      scope.remove = function() {
+        element.html('');
+      }
 
       });
     }
